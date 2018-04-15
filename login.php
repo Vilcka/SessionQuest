@@ -1,21 +1,21 @@
 <?php require 'inc/head.php';
-var_dump($_SESSION);
-var_dump($_POST);
-var_dump($_COOKIE);
 
 if(isset($_COOKIE['CookieFactoryUserName'])) {
     $_POST['loginName'] = $_COOKIE['CookieFactoryUserName'];
 }
-if(!empty($_POST['loginName'])){
 
-    $cookieName = 'CookieFactoryUserName';
-    $cookieValue = $_POST['loginName'];
-    setcookie($cookieName, $cookieValue, time() + 86400);
+if(!empty($_POST['loginName'])){
+    //Session's ID cookie
+    $cookieIdName = 'CookieFactoryId';
+    $cookieUserIdValue = session_id();
+    setcookie($cookieIdName,$cookieUserIdValue, time() +86400);
+    //Username Cookie
+    $cookieUserName = 'CookieFactoryUserName';
+    $cookieUserValue = $_POST['loginName'];
+    setcookie($cookieUserName, $cookieUserValue, time() + 86400);
     $_SESSION['name'] = $_POST['loginName'];
     header('location: index.php');
 }
-
-
 
 ?>
 <div class="container" style="margin-top:40px">

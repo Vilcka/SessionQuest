@@ -6,21 +6,19 @@ if(!isset($_SESSION)) {
 if(!isset($_SESSION['name'])) {
     header('location: login.php');
 }
-//unset($_SESSION['cart']);
-if(!empty($_GET)) {
-    setcookie('cookieCart', $_GET['add_to_cart'], time() + 86400);
-    $_SESSION['cart'] = $_GET['add_to_cart'];
+
+if(!empty($_GET['add_to_cart'])) {
+    if(empty($_SESSION['cart'][$_GET['add_to_cart']])) {
+        $id = $_GET['add_to_cart'];
+        $_SESSION['cart'][$id] = 1;
+        setcookie('cookieCart', serialize($_SESSION['cart']), time() + 86400);
+    }else{
+        $id = $_GET['add_to_cart'];
+        $quantity = $_SESSION['cart'][$id];
+        $_SESSION['cart'][$id] = $quantity +1;
+        setcookie('cookieCart', serialize($_SESSION['cart']), time() + 86400);
+    }
 }
-
-//Code commenté afin de facilité la correction ;)
-//var_dump($_SESSION);
-//var_dump($_COOKIE);
-//var_dump($_GET);
-
-
-
-
-
 ?>
 
 <section class="cookies container-fluid">
