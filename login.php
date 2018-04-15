@@ -1,12 +1,13 @@
 <?php require 'inc/head.php';
+var_dump($_SESSION);
+var_dump($_POST);
+var_dump($_COOKIE);
 
-if(!isset($_SESSION)) {
-    session_start();
-}
 if(isset($_COOKIE['CookieFactoryUserName'])) {
     $_POST['loginName'] = $_COOKIE['CookieFactoryUserName'];
 }
 if(!empty($_POST['loginName'])){
+
     $cookieName = 'CookieFactoryUserName';
     $cookieValue = $_POST['loginName'];
     setcookie($cookieName, $cookieValue, time() + 86400);
