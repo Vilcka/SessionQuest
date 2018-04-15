@@ -1,7 +1,5 @@
 <?php require 'inc/head.php';
-var_dump($_SESSION);
-var_dump($_POST);
-var_dump($_COOKIE);
+
 if(!isset($_SESSION)) {
     session_start();
 }
